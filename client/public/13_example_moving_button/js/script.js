@@ -2,10 +2,10 @@
 let socket = io();
 
 
+$('.button').click(handleButtonClick);
 
-function handleButtonClick() {
-    // console.log("button wurde geklickt");
-    socket.emit('serverEvent', "süd");
+function handleButtonClick(ev) {
+    socket.emit('serverEvent', "west");
 }
 
 
@@ -17,30 +17,29 @@ socket.on('connected', function (msg) {
 socket.on('serverEvent', function (message) {
     console.log(message);
 
-    let button1 = document.getElementById("button1");
 
     if (message == "süd") {
-        let y = button1.offsetTop;
-        y = y + 20;
-        button1.style.top = y + "px";
+        let x = $('#button1').position().top;
+        x = x + 20;
+        $('#button1').css("top", x);
     }
 
     if (message == "nord") {
-        let y = button1.offsetTop;
-        y = y - 20;
-        button1.style.top = y + "px";
+        let x = $('#button1').position().top;
+        x = x - 20;
+        $('#button1').css("top", x);
     }
 
     if (message == "ost") {
-        let x = button1.offsetLeft;
+        let x = $('#button1').position().left;
         x = x - 20;
-        button1.style.left = x + "px";
+        $('#button1').css("left", x);
     }
 
     if (message == "west") {
-        let x = button1.offsetLeft;
+        let x = $('#button1').position().left;
         x = x + 20;
-        button1.style.left = x + "px";
+        $('#button1').css("left", x);
     }
 
 });
